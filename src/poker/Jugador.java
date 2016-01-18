@@ -31,13 +31,13 @@ public class Jugador {
     }
 
     public Carta cogerCarta(int posicion) {
-        // necesitamos un backup eliminar la carta
+        // copia de la carta
         Carta cartaCopia = this.mano.get(posicion);
 
-        // ahora eliminamos la carta
+        // eliminar carta
         this.mano.remove(posicion);
 
-        // y devolvemos la carta.
+        //devolver carta.
         return cartaCopia;
     }
 
@@ -55,7 +55,7 @@ public class Jugador {
     public void añadirCarta(Carta cartaRecibida) {
         this.mano.add(cartaRecibida);
 
-        // cuando la mano tega 5 cartas podrá actualizar los puntos
+        // puntuar cuando este completa la mano
         if (this.mano.size() > 4) {
             this.puntuacion();
         }
@@ -85,8 +85,7 @@ public class Jugador {
                 // comparar 2 cartas
                 if (this.mano.get(i).verNumero() != jugada[1]
                         && this.mano.get(i).verNumero() != jugada[2]) {
-                    // Si entra en este if es que la carta no coincide con la
-                    // primera pareja ni con la segunda pareja
+                    
                     descartarCartas.add(Integer.toString(this.mano.get(i).verValor()));
                 }
             }
@@ -108,14 +107,14 @@ public class Jugador {
 
         if (comprobarJugada[0] == "trio") {
 
-            // si la jugada es trio guardamos la info
+            // si la jugada es trio guardrs la info
             almacenarJugada[0] = comprobarJugada[0];	// Trio  almacenar jugada
             almacenarJugada[1] = comprobarJugada[1];	// Numero almacenar carta
             almacenarJugada[2] = "nada";                // almacenar carta
             almacenarJugada[3] = "300";		// Puntos almacenar puntos
 
         } else {
-            // si la jugada es doble pareja guardamos la info
+            // si la jugada es doble pareja guardar la info
             comprobarJugada = this.hayParejas();
 
             if (comprobarJugada[0] == "doble pareja") {
@@ -136,7 +135,7 @@ public class Jugador {
                 // No hay jugada
 
                 almacenarJugada[0] = comprobarJugada[0];	// No hay jugada
-                almacenarJugada[1] = comprobarJugada[1];	// Carta alta
+                almacenarJugada[1] = comprobarJugada[1];	
                 almacenarJugada[2] = "nada";
                 almacenarJugada[3] = "0";			// No hay puntos
             }

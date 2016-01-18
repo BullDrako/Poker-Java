@@ -16,7 +16,7 @@ public class Baraja {
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
 
     //Constructor 
-    public void nuevaBarajaPoker() {
+    public void BarajaPoker() {
 
         this.baraja.clear();
 
@@ -57,7 +57,7 @@ public class Baraja {
 
     public void imprimir() {
 
-        // imprimir todas las cartas de la baraja
+        // imprimir cartas de la baraja
         for (int i = 0; i < this.baraja.size(); i++) {
             this.baraja.get(i).imprimir();
         }

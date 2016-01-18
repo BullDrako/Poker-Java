@@ -16,10 +16,10 @@ public class Poker {
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private Baraja baraja = new Baraja();
 
-    //Constructor 
+    
     public Poker() {
         // crear jugadores
-        this.crearJugadores();
+        this.jugadores();
 
         System.out.println(" ");
         System.out.println("---PARTICIPANTES---");
@@ -28,7 +28,7 @@ public class Poker {
         System.out.println("\n ---COMENZAR JUEGO POKER ---");
         System.out.println(" ");
         // CREAR BARAJA ORDENADA        
-        this.baraja.nuevaBarajaPoker();
+        this.baraja.BarajaPoker();
 
         // IMPRIMIR BARAJA ORDENADA   
         System.out.println("Baraja ORDENADA");
@@ -60,7 +60,7 @@ public class Poker {
 
     // Metodos 
     // Crear jugador
-    private void crearJugadores() {
+    private void jugadores() {
         for (int i = 1; i <= 4; i++) {
             // añadir jugador
             this.jugadores.add(new Jugador("Jugador " + i));
@@ -90,27 +90,27 @@ public class Poker {
     }
 
     private void descartesDelJugador(int numJugador) {
-        // Necesitamos saber que cartas quiere descartar el jugador
-        ArrayList<String> descartarPorValores = this.jugadores.get(numJugador).descartar();
+        // cartas que va a descartar jugador
+        ArrayList<String> descartar = this.jugadores.get(numJugador).descartar();
 
         for (int i = 0; i < this.jugadores.get(numJugador).verMano(); i++) {
-            for (int j = 0; j < descartarPorValores.size(); j++) {
-                // Si el valor de la carta i es igual al valor j hay que descartar
-                if (this.jugadores.get(numJugador).verCarta(i).verValor() == Integer.parseInt(descartarPorValores.get(j))) {
-                    // hemos encontraro una coincidencia para descartar
-                    // cogemos la carta i y la metemos de nuevo en la baraja
+            for (int j = 0; j < descartar.size(); j++) {
+                // Si la carta i es igual a la j se descarta
+                if (this.jugadores.get(numJugador).verCarta(i).verValor() == Integer.parseInt(descartar.get(j))) {
+                    
+                    // coger la carta i y la meterla en la baraja
 
                     this.baraja.añadirCarta(this.jugadores.get(numJugador).cogerCarta(i));
 
                     // Al guardar la carta el tamaño de la mano disminuye
                     i--;
 
-                    j = descartarPorValores.size();
+                    j = descartar.size();
                 }
             }
         }
         // Dar cartas nuevas al jugador
-        for (int i = 0; i < descartarPorValores.size(); i++) {
+        for (int i = 0; i < descartar.size(); i++) {
             this.jugadores.get(numJugador).añadirCarta(this.baraja.cogerCarta());
         }
     }
@@ -156,7 +156,7 @@ public class Poker {
         this.jugadores.get(id).imprimir();
     }
 
-    // Metodo que ayuda a imprimir la baraja
+    // imprimir baraja
     private void imprimirBaraja() {
         System.out.println("---Baraja---");
         this.baraja.imprimir();
